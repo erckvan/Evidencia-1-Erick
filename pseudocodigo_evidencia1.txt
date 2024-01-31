@@ -1,0 +1,74 @@
+pseudocodigo
+
+Inicio del programa
+
+Definir la clase Doctor:
+    Atributos:
+        - id: String
+        - nombreCompleto: String
+        - especialidad: String
+    Métodos:
+        - Constructor que inicializa los atributos
+        - Métodos getters para obtener los valores de los atributos
+
+Definir la clase Paciente:
+    Atributos:
+        - id: String
+        - nombreCompleto: String
+    Métodos:
+        - Constructor que inicializa los atributos
+        - Métodos getters para obtener los valores de los atributos
+
+Definir la clase Cita:
+    Atributos:
+        - id: String
+        - fechaHora: LocalDateTime
+        - motivo: String
+        - doctor: Doctor
+        - paciente: Paciente
+    Métodos:
+        - Constructor que inicializa los atributos
+        - Métodos getters para obtener los valores de los atributos
+
+Definir la clase Administrador:
+    Atributos:
+        - username: String
+        - password: String
+    Métodos:
+        - Constructor que inicializa los atributos
+        - Métodos getters para obtener los valores de los atributos
+
+Definir la clase Main:
+    Atributos:
+        - doctores: Map<String, Doctor>
+        - pacientes: Map<String, Paciente>
+        - administradores: Map<String, Administrador>
+        - citaCounter: int
+    Métodos:
+        - Método main:
+            - Crear e inicializar los mapas doctores, pacientes y administradores
+            - Solicitar al usuario que ingrese su nombre de usuario y contraseña
+            - Validar las credenciales del administrador
+            - Mostrar el menú principal si las credenciales son válidas
+        - Método validarCredenciales:
+            - Recibe un nombre de usuario y una contraseña
+            - Comprueba si el administrador con ese nombre de usuario existe y si la contraseña es correcta
+            - Devuelve true si las credenciales son válidas, false en caso contrario
+        - Método mostrarMenu:
+            - Muestra un menú de opciones para el usuario
+            - Permite al usuario seleccionar entre dar de alta doctores, pacientes, crear citas o salir del programa
+        - Método darAltaDoctor:
+            - Solicita al usuario que ingrese los datos del nuevo doctor
+            - Crea un nuevo objeto Doctor con los datos proporcionados
+            - Agrega el doctor al mapa de doctores
+        - Método darAltaPaciente:
+            - Solicita al usuario que ingrese los datos del nuevo paciente
+            - Crea un nuevo objeto Paciente con los datos proporcionados
+            - Agrega el paciente al mapa de pacientes
+        - Método crearCita:
+            - Solicita al usuario que ingrese los datos de la nueva cita (doctor, paciente, fecha y hora, motivo)
+            - Crea un nuevo objeto Cita con los datos proporcionados
+            - Incrementa el contador de citas para asignar un nuevo ID a la cita
+            - Muestra un mensaje confirmando la creación de la cita
+
+Fin del programa
