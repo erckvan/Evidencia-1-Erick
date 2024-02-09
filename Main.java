@@ -114,6 +114,7 @@ class Administrador {
 public class Main {
     private static Map<String, Doctor> doctores = new HashMap<>();
     private static Map<String, Paciente> pacientes = new HashMap<>();
+    private static Map<String, Cita> citas = new HashMap<>();
     private static Map<String, Administrador> administradores = new HashMap<>();
     private static int citaCounter = 1;
 
@@ -152,7 +153,8 @@ public class Main {
             System.out.println("1. Dar de alta doctor");
             System.out.println("2. Dar de alta paciente");
             System.out.println("3. Crear cita");
-            System.out.println("4. Salir");
+            System.out.println("4. Guardar datos");
+            System.out.println("5. Salir");
             opcion = scanner.nextInt();
             switch (opcion) {
                 case 1:
@@ -165,12 +167,15 @@ public class Main {
                     crearCita();
                     break;
                 case 4:
+                    saveData("C:\\Users\\jaivg\\IdeaProjects\\Evidencia 1 Erick Medina\\db\\Datos.txt");
+                    break;
+                case 5:
                     System.out.println("Saliendo del programa...");
                     break;
                 default:
                     System.out.println("Opción no válida");
             }
-        } while (opcion != 4);
+        } while (opcion != 5);
     }
 
     // Método para dar de alta un doctor
@@ -235,6 +240,29 @@ public class Main {
         String motivo = scanner.nextLine();
 
         Cita cita = new Cita("CITA" + citaCounter++, fechaHora, motivo, doctor, paciente);
+        citas.put(cita.getId(), cita); // Agregar cita al mapa
         System.out.println("Cita creada con éxito.");
+    }
+
+    // Método para guardar los datos de doctores, pacientes y citas en un archivo
+    private static void saveData(String filePath) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            // Guardar datos de doctores
+            for (Doctor doctor : doctores.values()) {
+                writer.write("Doctor: " + doctor.getId() + ", " + doctor.getNombreCompleto() + ", " + doctor.getEspecialidad() + "\n");
+            }
+            // Guardar datos de pacientes
+            for (Paciente paciente : pacientes.values()) {
+                writer.write("Paciente: " + paciente.getId() + ", " + paciente.getNombreCompleto() + "\n");
+            }
+            // Guardar datos de citas
+            for (Cita cita : citas.values()) {
+                writer.write("Cita: " + cita.getId() + ", " + cita.getFechaHora() + ", " + cita.getMotivo() +
+                        ", Doctor: " + cita.getDoctor().getId() + ", Paciente: " + cita.getPaciente().getId() + "\n");
+            }
+            System.out.println("Datos guardados en: " + filePath);
+        } catch (IOException e) {
+            System.out.println("Error al guardar los datos: " + e.getMessage());
+        }
     }
 }
